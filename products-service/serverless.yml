@@ -1,0 +1,26 @@
+service: products-service
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-1
+
+plugins:
+  - serverless-esbuild
+
+functions:
+  getProductsList:
+    handler: getProductsList/getProductsList.handler
+    events:
+      - http:
+          path: /products
+          method: get
+  getProductById:
+    handler: getProductById/getProductById.handler
+    events:
+      - http:
+          path: /products/{productId}
+          method: get
